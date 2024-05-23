@@ -1,30 +1,19 @@
-import { Routes, Route } from "react-router-dom";
-import SigninForm from "./_auth/forms/SigninForm";
-import SignupForm from "./_auth/forms/SignupForm";
-import AuthLayout from "./_auth/AuthLayout";
-import { Home } from "./_root/pages/";
-import RootLayout from "./_root/RootLayout";
-import "./global.css";
-import { Toaster } from "@/components/ui/toaster";
+import { Container } from "@chakra-ui/react";
+import { Route, Routes } from "react-router-dom";
+import UserPage from "./pages/UserPage";
+import PostPage from "./pages/PostPage";
+import Header from "./components/Header";
 
-const App = () => {
+function App() {
   return (
-    <main className="flex h-screen">
+    <Container maxW="620px">
+      <Header />
       <Routes>
-        <Route element={<AuthLayout />}>
-          <Route path="/sign-in" element={<SigninForm />} />
-          <Route path="/sign-up" element={<SignupForm />} />
-        </Route>
-        {/* public routes */}
-
-        {/* private routes */}
-        <Route element={<RootLayout />}>
-          <Route index element={<Home />} />
-        </Route>
+        <Route path="/:username" element={<UserPage />} />
+        <Route path="/:username/post/:pid" element={<PostPage />} />
       </Routes>
-
-      <Toaster />
-    </main>
+    </Container>
   );
-};
+}
+
 export default App;
